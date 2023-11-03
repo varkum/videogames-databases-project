@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @videogame %>
+
+<div>
+  <%= link_to "Edit this videogame", edit_videogame_path(@videogame) %> |
+  <%= link_to "Back to videogames", videogames_path %>
+
+  <%= button_to "Destroy this videogame", @videogame, method: :delete %>
+</div>
