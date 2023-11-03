@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_03_201914) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_03_225011) do
   create_table "sales", force: :cascade do |t|
-    t.integer "value"
+    t.decimal "value"
     t.integer "videogame_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -20,10 +20,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_201914) do
   end
 
   create_table "scores", force: :cascade do |t|
-    t.integer "type"
+    t.integer "rater"
     t.integer "videogame_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "value"
     t.index ["videogame_id"], name: "index_scores_on_videogame_id"
   end
 

@@ -9,6 +9,15 @@ require 'csv'
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+def print_runtime
+  started_at = Time.now
+  yield
+ensure
+  runtime = Time.now - started_at
+  puts "  Finished all in #{sprintf("%.1f seconds", runtime)}"
+end
+
 def normalize_name(name)
   name.strip.downcase
 end
@@ -58,22 +67,35 @@ videogames_csv_text = File.read(Rails.root.join('lib', 'seeds', 'Video_Games.csv
 videogames_csv = CSV.parse(videogames_csv_text, headers: true)
 count = 0
 
-started_at = Time.now
 
 
-videogames_csv.each do |videogame_row|
-  ign_csv.each do |ign_row|
-    if normalize_name(videogame_row['Name']) == normalize_name(ign_row['title']) && ign_platform_to_videogame[ign_row['platform'].to_sym] == videogame_row["Platform"]
-      count+=1
+print_runtime do 
+  videogames_csv.each do |videogame_row|
+    ign_csv.each do |ign_row|
+      if normalize_name(videogame_row['Name']) == normalize_name(ign_row['title']) && ign_platform_to_videogame[ign_row['platform'].to_sym] == videogame_row["Platform"]
+        game = Videogame.new
+        game.name = ign_row['title']
+        game.platform = ign_row['platform'].try(:parametrize)
+        game.year = videogame_row["Year_of_Release"]&.to_i || ign_row['release_year']
+        game.developer = videogame_row["Developer"]
+        game.genre = videogame_row["Genre"].try(:parametrize)
+        game.editorschoice = ign_row['editors_choice'].try(:downcase)
+        game.rating = videogame_row["Rating"].try(:downcase).try(:underscore)
+        game.save
+
+        game.create_sale(value: videogame_row["Global_Sales"]&.to_f)
+
+        game.scores.create(rater: :ign, value: ign_row['score'].to_i* 10) unless ign_row['score'].nil?
+        game.scores.create(rater: :user, value: videogame_row['User_Score'].to_i * 10) unless videogame_row['User_Score'].nil?
+        game.scores.create(rater: :critic, value: videogame_row["Critic_Score"].to_i) unless videogame_row["Critic_Score"].nil?
+        count+=1
+      end
     end
+    print '.'
   end
-  print '.'
 end
 
-
-runtime = Time.now - started_at
-
-puts "  Finished all in #{sprintf("%.1f seconds", runtime)}" 
+ 
 
 puts "Record count: #{count}"
 
