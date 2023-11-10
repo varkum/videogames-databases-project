@@ -1,0 +1,14 @@
+<nav class="relative text-center bg-blue-600 text-white w-full py-5">
+  <h1 class="text-2xl font-bold">Videogame Search</h1>
+
+  <% if Current.user.present? %>
+    <div class="absolute right-10 top-6 flex justify-center items-center">
+      <%= button_to "Sign out", sigin_path, method: :delete %>
+    </div>
+  <% else %>
+    <div class="absolute right-10 top-6 flex justify-center items-center gap-4">
+      <%= link_to "Sign in", signin_path %>
+      <%= link_to "Sign Up", signup_path %>
+    </div>
+  <% end %>
+</nav>

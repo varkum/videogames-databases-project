@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   resources :wishlists
-  resources :users
+
+  get "signup", to: "users#new"
+  post "signup", to: "users#create"
+
+  get "signin", to: 'sessions#new'
+  post 'signin', to: 'sessions#create'
+  delete 'signin', to: 'sessions#destroy'
+
   resources :sales
   resources :scores
   resources :videogames
@@ -11,5 +18,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  # root "posts#index"
+   root "videogames#index"
 end

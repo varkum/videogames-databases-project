@@ -75,10 +75,10 @@ print_runtime do
       if normalize_name(videogame_row['Name']) == normalize_name(ign_row['title']) && ign_platform_to_videogame[ign_row['platform'].to_sym] == videogame_row["Platform"]
         game = Videogame.new
         game.name = ign_row['title']
-        game.platform = ign_row['platform'].try(:parametrize)
+        game.platform = ign_row['platform'].try(:parameterize).try(:underscore)
         game.year = videogame_row["Year_of_Release"]&.to_i || ign_row['release_year']
         game.developer = videogame_row["Developer"]
-        game.genre = videogame_row["Genre"].try(:parametrize)
+        game.genre = videogame_row["Genre"].try(:parameterize).try(:underscore)
         game.editorschoice = ign_row['editors_choice'].try(:downcase)
         game.rating = videogame_row["Rating"].try(:downcase).try(:underscore)
         game.save

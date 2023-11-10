@@ -1,14 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Videogames</h1>
-
-<div id="videogames">
+<div id="videogames" class="grid grid-cols-5 gap-4">
   <% @videogames.each do |videogame| %>
     <%= render videogame %>
-    <p>
-      <%= link_to "Show this videogame", videogame %>
-    </p>
   <% end %>
 </div>
 
-<%= link_to "New videogame", new_videogame_path %>
+

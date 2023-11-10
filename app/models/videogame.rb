@@ -37,7 +37,7 @@ xbox_one
   enum genre: %i[ sports
   platform
   racing
-  roleplaying
+  role_playing
   puzzle
   misc
   shooter
