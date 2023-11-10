@@ -3,7 +3,8 @@
 
   <% if Current.user.present? %>
     <div class="absolute right-10 top-6 flex justify-center items-center">
-      <%= button_to "Sign out", sigin_path, method: :delete %>
+      <span class="mr-2">Hello <%= Current.user.name.split(' ')[0]%></span>
+      <%= button_to "Sign out", signin_path, method: :delete, class: "bg-red-500 text-sm font-semibold rounded p-2" %>
     </div>
   <% else %>
     <div class="absolute right-10 top-6 flex justify-center items-center gap-4">

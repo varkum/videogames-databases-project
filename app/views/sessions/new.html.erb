@@ -1,0 +1,22 @@
+<div class="flex justify-center items-center w-full mt-20">
+  <div class="bg-red-500 text-white font-semibold my-2 text-center">
+    <p><%= flash[:alert]%></p>
+  </div>
+
+  <%= form_with(url: signin_path, class: "bg-slate-200 p-5 rounded-xl") do |form| %>
+
+    <div class="mt-2">
+      <%= form.label :email, style: "display: block" %>
+      <%= form.text_field :email, class: "w-80 rounded border-0" %>
+    </div>
+
+    <div class="mt-2">
+      <%= form.label :password, style: "display: block" %>
+      <%= form.password_field :password, class: "w-80 rounded border-0" %>
+    </div>
+
+    <div>
+      <%= form.submit "Sign In", class: "text-center font-semibold w-full p-2 rounded-xl bg-sky-600 text-white mt-2 hover:cursor-pointer hover:opacity-70" %>
+    </div>
+  <% end %>
+</div>
