@@ -12,8 +12,13 @@ class My::WishlistsController < ApplicationController
     else
       @wishlist.videogames << videogame_to_add
    end
-   Rails.logger.info action_name + " here!"
-   render partial: "videogames/videogame", object: videogame_to_add
+   url = Rails.application.routes.recognize_path(request.referrer)
+   last_controller = url[:controller]
+   if last_controller == "my/wishlists"
+    render turbo_stream: turbo_stream.remove(helpers.dom_id(videogame_to_add))
+   else
+    render partial: "videogames/videogame", object: videogame_to_add
+   end
   end
 
   private
@@ -21,3 +26,6 @@ class My::WishlistsController < ApplicationController
       @wishlist = Current.user.wishlist
     end
 end
+
+
+#my/wishlists vs videogames
