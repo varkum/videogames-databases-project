@@ -16,8 +16,10 @@ class My::WishlistsController < ApplicationController
   # PATCH/PUT /wishlists/1 or /wishlists/1.json
   def update
     videogame_to_add = Videogame.find(params[:videogame])
-    unless Current.user.wishlist.videogames.include? videogame_to_add
-    Current.user.wishlist.videogames << videogame_to_add
+    if Current.user.wishlist.videogames.include? videogame_to_add
+      Current.user.wishlist.videogames.destroy videogame_to_add
+    else
+      Current.user.wishlist.videogames << videogame_to_add
    end
 
    render partial: "videogames/videogame", object: videogame_to_add
