@@ -1,11 +1,12 @@
 <nav class="relative text-center bg-blue-600 text-white w-full py-5">
-  <h1 class="text-2xl font-bold">Videogame Search</h1>
+  <%= link_to root_path do %>
+    <h1 class="text-2xl font-bold">Videogame Search</h1>
+  <% end %>
 
   <% if Current.user.present? %>
     <div class="absolute right-10 top-6 flex justify-center items-center">
       <%= link_to "#{Current.user.name.split(' ')[0]}'s wishlist", my_wishlist_path %>
-      <span class="mr-2"></span>
-      <%= button_to "Sign out", signin_path, method: :delete, class: "bg-red-500 text-sm font-semibold rounded p-2" %>
+      <%= button_to "Sign out", signin_path, method: :delete, class: "bg-red-500 text-sm font-semibold rounded p-2 ml-6" %>
     </div>
   <% else %>
     <div class="absolute right-10 top-6 flex justify-center items-center gap-4">

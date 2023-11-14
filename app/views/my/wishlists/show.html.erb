@@ -1,0 +1,9 @@
+<div class="w-full mt-[-56px]">
+  <h2 class="text-center text-2xl font-semibold mb-3">My Wishlist</h2>
+
+  <div id="videogames" class="grid grid-cols-5 gap-4">
+    <% @wishlist_videogames.each do |videogame| %>
+      <%= render partial: "videogames/videogame", object: videogame %>
+    <% end %>
+  </div>
+</div>
