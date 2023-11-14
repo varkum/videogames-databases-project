@@ -1,4 +1,5 @@
-<div id="<%= dom_id videogame %>" class="bg-white border-2 flex-col rounded-lg px-2 py-2 box-shadow-2xl shadow-blue-500/50">
+
+<div id="<%= dom_id videogame %>" class="relative bg-white border-2 flex-col rounded-lg px-2 py-2 box-shadow-2xl shadow-blue-500/50">
 
   <div class="flex justify-between mb-1">
     <p class="text-sm text-gray-500">
@@ -33,4 +34,11 @@
     </span>
   <% end %>
 
+  <%= turbo_frame_tag "#{dom_id(videogame)}_add_to_wishlist" do %>
+    <% if Current.user.wishlist.videogames.include? videogame %>
+      <%= button_to "✓", my_wishlist_path(videogame: videogame), method: :patch, class: "absolute font-bold text-2xl right-2 bottom-1 text-white h-8 w-8 rounded-full bg-green-500", title: "remove from wishlist" %>
+    <% else %>
+      <%= button_to "+", my_wishlist_path(videogame: videogame), method: :patch, class: "absolute font-bold text-2xl right-2 bottom-1", title: "add to wishlist" %>
+    <% end %>
+  <% end %>
 </div>

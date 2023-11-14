@@ -10,6 +10,6 @@ class User < ApplicationRecord
   private
   
   def create_wishlist
-    create_wishlist
+    create_wishlist!
   end
 end

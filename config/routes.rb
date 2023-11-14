@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   namespace "my" do
     get "wishlist", to: "wishlists#show"
-    get "wishlist/edit", to: "wishlists#edit"
-    patch "wishlist/edit", to: "wishlists#update"
+    patch "wishlist", to: "wishlists#update"
   end
 
   get "signup", to: "users#new"
