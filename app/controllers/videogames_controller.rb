@@ -12,6 +12,20 @@ class VideogamesController < ApplicationController
     render :index
   end
 
+  def sort
+    case params[:sort_by]
+    when "best_selling"
+      @videogames = Videogame.joins(:sale).order("sales.value DESC")
+    when "highest_rated"
+      @videogames = Videogame.order(average_score: :desc)
+    else
+      @videogames = Videogame.all
+    end
+
+    @pagy, @videogames = pagy(@videogames, items: 25)
+    render :index
+  end
+
   def filter
     @videogames = Videogame.all
     session[:filters].merge!(filter_params.to_h)

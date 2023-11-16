@@ -88,6 +88,8 @@ print_runtime do
         game.scores.create(rater: :ign, value: ign_row['score'].to_i* 10) unless ign_row['score'].nil?
         game.scores.create(rater: :user, value: videogame_row['User_Score'].to_i * 10) unless videogame_row['User_Score'].nil?
         game.scores.create(rater: :critic, value: videogame_row["Critic_Score"].to_i) unless videogame_row["Critic_Score"].nil?
+
+        game.update!(average_score: game.scores.average(:value))
         count+=1
       end
     end

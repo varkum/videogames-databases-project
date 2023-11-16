@@ -1,0 +1,4 @@
+<%= form_with url: sort_videogames_path, method: :get, data: {turbo_frame: "videogames"} do |form| %>
+  <%= form.label :sort_by, class:"font-semibold" %>
+  <%= form.select :sort_by, [["Best Selling", "best_selling"], ["Highest Rated", "highest_rated"]], {prompt: "Select..."}, {class: "rounded", onchange: 'this.form.requestSubmit()'}%>
+<% end %>

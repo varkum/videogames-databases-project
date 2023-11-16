@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_14_150610) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_16_222614) do
   create_table "sales", force: :cascade do |t|
     t.decimal "value"
     t.integer "videogame_id", null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_14_150610) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "rating"
+    t.integer "average_score"
   end
 
   create_table "videogames_wishlists", id: false, force: :cascade do |t|

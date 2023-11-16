@@ -8,6 +8,7 @@ class Videogame < ApplicationRecord
   enum editorschoice: %i[ n y]
   enum rating: %i[ ao e10+ e ec k_a m rp t ]
 
+
   FILTER_ATTRIBUTES = %w[ platform year rating genre ]
 
   def self.search(query)
@@ -16,9 +17,5 @@ class Videogame < ApplicationRecord
 
   def self.filter(starting_values, field, query_values)
     starting_values.where(field.to_sym => query_values) unless query_values.empty?
-  end
-
-  def average_score
-    scores.average(:value)
   end
 end
