@@ -29,9 +29,10 @@
       <strong>Global sales:</strong>
       $<%= videogame.sale.value %>M
     </p>
-    
   </div>
-  
+  <p class="bg-gradient-to-r from-teal-500 to-pink-500 text-transparent bg-clip-text text-sm font-semibold mb-1">
+    <%= videogame.average_score.to_i %>% 🎮
+  </p>
 
   
   <% if videogame.editorschoice == "y" %>
