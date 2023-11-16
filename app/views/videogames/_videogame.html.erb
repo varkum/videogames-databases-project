@@ -25,20 +25,28 @@
       <strong>Developer:</strong>
       <%= videogame.developer.try(:humanize) %>
     </p>
+    <p>
+      <strong>Global sales:</strong>
+      $<%= videogame.sale.value %>M
+    </p>
     
   </div>
+  
 
+  
   <% if videogame.editorschoice == "y" %>
     <span class="bg-amber-600 font-semibold text-white px-2 py-1 rounded-full text-sm">
       Editor's Choice
     </span>
   <% end %>
 
-  <%= turbo_frame_tag "#{dom_id(videogame)}_add_to_wishlist" do %>
-    <% if Current.user.wishlist.videogames.include? videogame %>
-      <%= button_to "✓", my_wishlist_path(videogame: videogame), method: :patch, class: "absolute font-bold text-2xl right-2 bottom-1 text-white h-8 w-8 rounded-full bg-green-500", title: "remove from wishlist" %>
-    <% else %>
-      <%= button_to "+", my_wishlist_path(videogame: videogame), method: :patch, class: "absolute font-bold text-2xl right-2 bottom-1", title: "add to wishlist" %>
+  <% if Current.user.present? %>
+    <%= turbo_frame_tag "#{dom_id(videogame)}_add_to_wishlist" do %>
+      <% if Current.user.wishlist.videogames.include? videogame %>
+        <%= button_to "✓", my_wishlist_path(videogame: videogame), method: :patch, class: "absolute font-bold text-2xl right-2 bottom-1 text-white h-8 w-8 rounded-full bg-green-500", title: "remove from wishlist" %>
+      <% else %>
+        <%= button_to "+", my_wishlist_path(videogame: videogame), method: :patch, class: "absolute font-bold text-2xl right-2 bottom-1", title: "add to wishlist" %>
+      <% end %>
     <% end %>
   <% end %>
 </div>

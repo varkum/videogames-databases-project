@@ -17,4 +17,8 @@ class Videogame < ApplicationRecord
   def self.filter(starting_values, field, query_values)
     starting_values.where(field.to_sym => query_values) unless query_values.empty?
   end
+
+  def average_score
+    scores.average(:value)
+  end
 end
