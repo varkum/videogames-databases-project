@@ -1,0 +1,6 @@
+<%= form_with url: filter_videogames_path, method: :get, data: { turbo_frame: "videogames" } do |form| %>
+  <div class="flex flex-col">
+    <%= form.label attribute.humanize %>
+    <%= form.select attribute, generate_options(attribute), {prompt: attribute.humanize}, {class: "rounded"} %>
+  </div>
+<% end %> 

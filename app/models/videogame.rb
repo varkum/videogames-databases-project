@@ -8,6 +8,8 @@ class Videogame < ApplicationRecord
   enum editorschoice: %i[ n y]
   enum rating: %i[ ao e10+ e ec k_a m rp t ]
 
+  FILTER_ATTRIBUTES = %w[ platform year rating genre ]
+
   def self.search(query)
     where("lower(name) LIKE lower(?)", "%#{query}%")
   end

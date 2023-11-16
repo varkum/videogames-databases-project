@@ -1,3 +1,8 @@
-<div class="flex flex-row w-full mb-6 mt-[-60px]">
+<div class="flex flex-row mb-10 mt-[-56px] justify-between">
   <%= render "search" %>
+  <div class="flex flex-row w-1/2 gap-4 justify-end">
+    <% Videogame::FILTER_ATTRIBUTES.each do |attribute| %>
+      <%= render "filter", attribute: attribute %>
+    <% end %>
+  </div>
 </div>
