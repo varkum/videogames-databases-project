@@ -4,10 +4,22 @@ class VideogamesController < ApplicationController
   # GET /videogames or /videogames.json
   def index
     @pagy, @videogames = pagy(Videogame.all, items: 25)
+    session[:filters] = {}
   end
 
   def search
     @pagy, @videogames = pagy(Videogame.search(params[:name]), items: 25)
+    render :index
+  end
+
+  def filter
+    @videogames = Videogame.all
+    session[:filters].merge!(filter_params.to_h)
+    session[:filters].each do |attribute, query|
+      @videogames = Videogame.filter(@videogames, attribute, query)
+    end
+
+    @pagy, @videogames = pagy(@videogames, items: 25)
     render :index
   end
 
@@ -72,4 +84,8 @@ class VideogamesController < ApplicationController
     def videogame_params
       params.require(:videogame).permit(:name, :platform, :year, :developer, :genre, :editorschoice)
     end
+
+    def filter_params
+      params.permit(Videogame::FILTER_ATTRIBUTES)
+  end
 end

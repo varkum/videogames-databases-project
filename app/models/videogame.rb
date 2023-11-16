@@ -13,4 +13,8 @@ class Videogame < ApplicationRecord
   def self.search(query)
     where("lower(name) LIKE lower(?)", "%#{query}%")
   end
+
+  def self.filter(starting_values, field, query_values)
+    starting_values.where(field.to_sym => query_values) unless query_values.empty?
+  end
 end
