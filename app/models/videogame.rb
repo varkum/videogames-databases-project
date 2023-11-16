@@ -7,4 +7,8 @@ class Videogame < ApplicationRecord
   enum genre: %i[ sports platform racing role_playing puzzle misc shooter simulation action fighting adventure strategy ]
   enum editorschoice: %i[ n y]
   enum rating: %i[ ao e10+ e ec k_a m rp t ]
+
+  def self.search(query)
+    where("lower(name) LIKE lower(?)", "%#{query}%")
+  end
 end

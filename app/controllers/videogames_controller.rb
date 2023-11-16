@@ -6,6 +6,11 @@ class VideogamesController < ApplicationController
     @pagy, @videogames = pagy(Videogame.all, items: 25)
   end
 
+  def search
+    @pagy, @videogames = pagy(Videogame.search(params[:name]), items: 25)
+    render :index
+  end
+
   # GET /videogames/1 or /videogames/1.json
   def show
   end

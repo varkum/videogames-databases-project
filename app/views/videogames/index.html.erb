@@ -1,15 +1,18 @@
 <div>
-  <div id="videogames_placeholder" class="grid grid-cols-5 gap-4">
-    <% @videogames.each do |videogame|%>
-      <%= render videogame%>
-    <% end %>
-  </div>
+  <%= render "filter_panel" %>
+  <%= turbo_frame_tag "videogames" do %>
+    <div class="grid grid-cols-5 gap-4">
+      <% @videogames.each do |videogame|%>
+        <%= render videogame %>
+      <% end %>
+    </div>
 
-  <div class="text-center my-3">
-  <%== pagy_nav(@pagy) %>
-  <dt class="italic text-gray-400 text-sm mt-2">
-    <%== pagy_info(@pagy) %>
-  </dt>
-  </div>
+    <div class="text-center my-3">
+    <%== pagy_nav(@pagy) %>
+    <dt class="italic text-gray-400 text-sm mt-2">
+      <%== pagy_info(@pagy) %>
+    </dt>
+    </div>
+  <% end %>
 </div>
 
