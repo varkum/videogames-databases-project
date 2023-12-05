@@ -10,20 +10,6 @@ require 'csv'
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-def print_runtime
-  started_at = Time.now
-  yield
-ensure
-  runtime = Time.now - started_at
-  puts "  Finished all in #{sprintf("%.1f seconds", runtime)}"
-end
-
-def normalize_name(name)
-  name.strip.downcase
-end
-
-
-
 ign_platform_to_videogame =
   {
   "Atari 2600": "2600",
@@ -57,8 +43,18 @@ ign_platform_to_videogame =
   "Xbox": "XB",
   "Xbox One": "Xone"
   }
+  
+def print_runtime
+  started_at = Time.now
+  yield
+ensure
+  runtime = Time.now - started_at
+  puts "  Finished all in #{sprintf("%.1f seconds", runtime)}"
+end
 
-
+def normalize_name(name)
+  name.strip.downcase
+end
 
 ign_csv_text = File.read(Rails.root.join('lib', 'seeds', 'ign.csv'))
 ign_csv = CSV.parse(ign_csv_text, headers: true)
@@ -66,8 +62,6 @@ ign_csv = CSV.parse(ign_csv_text, headers: true)
 videogames_csv_text = File.read(Rails.root.join('lib', 'seeds', 'Video_Games.csv'))
 videogames_csv = CSV.parse(videogames_csv_text, headers: true)
 count = 0
-
-
 
 print_runtime do 
   videogames_csv.each do |videogame_row|
@@ -96,8 +90,6 @@ print_runtime do
     print '.'
   end
 end
-
- 
 
 puts "Record count: #{count}"
 
