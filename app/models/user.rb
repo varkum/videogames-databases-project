@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_one :wishlist
+  has_one :wishlist, dependent: :destroy
   
   has_secure_password
 
